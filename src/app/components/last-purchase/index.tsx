@@ -1,13 +1,13 @@
-import { Image, Text, View, Button, TouchableOpacity, Dimensions, Pressable } from "react-native"
+import { Image, Text, View, Dimensions, Pressable } from "react-native"
 import { styles } from "./style"
 import { useNavigation } from "@react-navigation/native"
-import { Paragraph, ParagraphBold, ParagraphSemibold, Title } from "../../styled-components/text"
+import { ParagraphSemibold, Title } from "../../styled-components/text"
 import { useProductContext } from "../../contexts/product-context"
-import { CallToAction, CallToActionMD, CallToActionText } from "../../styled-components/buttons"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { CallToActionMD, CallToActionText } from "../../styled-components/buttons"
 import AntDesign from '@expo/vector-icons/AntDesign';
 import useDeviceTheme from "../../theme/use-theme"
-import colors from "tailwindcss/colors"
+import { Purchase } from "../../contexts/purchase-context"
+import Product from "../../models/productModel"
 
 export const LastPurchase = ({ purchase }) => {
   const navigation = useNavigation()
@@ -35,29 +35,22 @@ export const LastPurchase = ({ purchase }) => {
       <View style={styles.headerDetails}>
         <Title>Última Compra</Title>
         <ParagraphSemibold>{formattedDate}</ParagraphSemibold>
-        <Pressable
-          style={{
-            backgroundColor: 'white',
-            borderWidth: 1,
-            borderColor: theme.color
-          }}
-          onPress={() => navigation.navigate('UnlockAccess')}
-        >
-          <AntDesign name="qrcode" size={24} color="black" />
-        </Pressable>
-      </View>
-
-      <View style={styles.headerDetails}>
-        <ParagraphSemibold style={{
-          backgroundColor: colors.red[500],
-          borderRadius: 2,
-          padding: 10,
-          color: 'white',
-        }}>{purchase.redeemed == false ? "Pendente" : ""}</ParagraphSemibold>
+        {purchase.redeemed == false && (
+          <Pressable
+            style={{
+              backgroundColor: 'white',
+              borderWidth: 1,
+              borderColor: theme.color
+            }}
+            onPress={() => navigation.navigate('UnlockAccess')}
+          >
+            <AntDesign name="qrcode" size={24} color="black" />
+          </Pressable>
+        )}
       </View>
 
       <View style={styles.filho}>
-        {purchase.items.map((item, index: number) => {
+        {purchase.items.map((item: Product, index: number) => {
           return (
             <View key={index} style={{ width: productWidth }}>
               <Image style={styles.product} source={{ uri: item.img_url }} />
@@ -78,4 +71,3 @@ export const LastPurchase = ({ purchase }) => {
     </View>
   )
 }
-

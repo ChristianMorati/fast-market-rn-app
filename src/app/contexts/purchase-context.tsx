@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 import Product from '../models/productModel';
 
-type Purchase = {
+export type Purchase = {
   id: any,
   _userId: string,
   date: any,

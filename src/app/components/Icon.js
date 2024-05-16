@@ -1,9 +1,9 @@
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons'; // Importando o conjunto de ícones AntDesign
 
 export const Icon = ({ name, size, color, style }) => {
   return (
-    <MaterialCommunityIcons
+    <AntDesign
       name={name}
       size={size}
       color={color}

@@ -18,8 +18,6 @@ export const styles = StyleSheet.create({
     },
     product: {
         aspectRatio: 1 / 1,
-        borderColor: 'gray',
-        borderWidth: .5,
         borderRadius: 8,
         backgroundColor: 'white',
         objectFit: 'contain',

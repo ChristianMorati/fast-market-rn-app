@@ -10,7 +10,7 @@ import { useAppSelector } from '../store/hooks/useAppSelector';
 import useDeviceTheme from '../theme/use-theme';
 import { useNavigation } from '@react-navigation/native';
 import { useStripe } from '@stripe/stripe-react-native';
-import { Timestamp, addDoc, arrayUnion, collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebaseConfig';
 import { usePurchaseContext } from './purchase-context';
 
@@ -38,7 +38,6 @@ export default function PaymentProvider({ children }: { children: ReactNode }) {
 
   const makePaymentIntent = async (Amount: number) => {
     try {
-      const token = await AsyncStorage.getItem('TOKEN');
       const response = await axios.post(`${BASE_URL_API}/payment/intent`,
         {
           username: userInfo.username,
@@ -46,7 +45,6 @@ export default function PaymentProvider({ children }: { children: ReactNode }) {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         }

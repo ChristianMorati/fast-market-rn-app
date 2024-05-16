@@ -4,18 +4,15 @@ import { ParagraphSemibold, Title } from "../../styled-components/text";
 import { ViewContainer } from '../../styled-components/view';
 import { globalStyles } from '../../global-styles';
 import useDeviceTheme from "../../theme/use-theme";
-import { auth } from '../../../../firebaseConfig';
 import { BasePage } from '../../components/base-page';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { usePurchaseContext } from '../../contexts/purchase-context';
 
 export default function UnlockAccessScreen() {
     const { theme } = useDeviceTheme();
     const { lastPurchase } = usePurchaseContext();
-    // last PurchaseID 
 
     const qrCodeData = JSON.stringify({
-        userId: auth?.currentUser?.uid,
         purchaseId: lastPurchase?.id
     })
 
@@ -48,21 +45,6 @@ export default function UnlockAccessScreen() {
                         />
                     </View>
                 </ViewContainer>
-
-                {/* <ViewContainer style={[globalStyles.baseViewContainer, globalStyles.roundedHidden, { alignItems: 'center' }]}>
-                    {!confirmedCart ? (
-                        <CallToActionMD onPress={confirmMyCartItems}>
-                            <CallToActionText>
-                                Confirmar meu carrinho
-                            </CallToActionText>
-                        </CallToActionMD>
-                    ) : (
-                        <View className='gap-2'>
-                            <ParagraphBold>Aguarde a verificação de produtos</ParagraphBold>
-                            <ActivityIndicator color={theme.callToActionBackground} size={'large'} />
-                        </View>
-                    )}
-                </ViewContainer> */}
             </>
         }
         />

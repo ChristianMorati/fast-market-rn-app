@@ -10,7 +10,6 @@ export {
   View,
   TextInput,
   Logo,
-  Icon,
   Button,
   FormErrorMessage,
   LoadingIndicator

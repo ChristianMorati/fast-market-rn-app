@@ -11,7 +11,6 @@ import { purchaseService } from "../../../services/PurchaseService";
 import { useFocusEffect } from "@react-navigation/native";
 
 type qrCodeData = {
-    userId: string,
     purchaseId: string
 }
 
@@ -43,13 +42,12 @@ export default function PurchaseRelease() {
         const qrCodeData: qrCodeData = JSON.parse(data);
 
         const qrCodeDataSchema = z.object({
-            userId: z.string().min(8),
             purchaseId: z.string().min(8)
         });
 
         try {
             const validatedData = qrCodeDataSchema.parse(qrCodeData);
-            const { userId, purchaseId } = qrCodeData;
+            const { purchaseId } = qrCodeData;
 
             const result = await purchaseService.redeemMyPurchase(purchaseId);
 
@@ -111,7 +109,6 @@ export default function PurchaseRelease() {
                             </CallToActionText>
                         </CallToActionMD>
                     </ViewContainer>
-
                 </>
             )}
         </>
